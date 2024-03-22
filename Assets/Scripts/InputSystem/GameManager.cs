@@ -9,7 +9,7 @@ using UnityEngine.InputSystem;
 public class GameManager : MonoBehaviour
 {
     [SerializeField] private GameObject _menu;
-    [SerializeField] private Player player;
+    [SerializeField] private GameObject player;
     [SerializeField] private float _acceleration;
     [SerializeField] private float _maxVelocity;
     private PlayerLogic playerLogic;
@@ -20,7 +20,6 @@ public class GameManager : MonoBehaviour
     {
         _input = new PlayerInput();
         _input.Player.ToggleMenu.performed += ctx => ToggleMenu();
-        _input.Player.Shoot.performed += ctx => player.Shoot();
     }
 
     private void Start()

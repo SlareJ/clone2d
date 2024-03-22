@@ -19,7 +19,6 @@ public class PlayerLogic
     public void Accelerate(Vector3 forward, float deltaTime)
     {
         _velocity += forward * _acceleration * deltaTime;
-        Debug.Log(forward);
         _velocity = Vector3.ClampMagnitude(_velocity, _maxVelocity);
     }
 
