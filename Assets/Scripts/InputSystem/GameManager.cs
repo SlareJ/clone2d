@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject player;
     [SerializeField] private float _acceleration;
     [SerializeField] private float _maxVelocity;
+    [SerializeField] private float rotationSpeed;
     private PlayerLogic playerLogic;
     private PlayerInput _input;
     private bool _isPaused = false;
@@ -24,7 +25,7 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        playerLogic = new PlayerLogic(_acceleration, _maxVelocity, player.transform.position);
+        playerLogic = new PlayerLogic(_acceleration, _maxVelocity, player);
     }
 
     private void OnEnable()
@@ -39,15 +40,9 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        if (_input.Player.Accelerate.ReadValue<float>() > 0) AccelerateShip();
-        player.transform.position = playerLogic.UpdatePosition(Time.deltaTime);
+        playerLogic.UpdatePosition(Time.deltaTime, _input.Player.Accelerate.ReadValue<float>(), player.transform.forward);
+        playerLogic.Rotate(Time.deltaTime, _input.Player.Rotate.ReadValue<float>(), rotationSpeed);
     }
-
-    private void AccelerateShip()
-    {
-        playerLogic.Accelerate(Quaternion.Euler(-90, 0, 0) * player.transform.forward, Time.deltaTime);
-    }
-
 
     public void ToggleMenu()
     {

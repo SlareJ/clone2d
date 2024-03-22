@@ -4,16 +4,16 @@ using UnityEngine;
 
 public class PlayerLogic
 {
-
     private float _acceleration = 0;
-    private float _maxVelocity;
+    private float _maxVelocity = 0;
     private Vector3 _velocity;
-    private Vector3 _position;
-    public PlayerLogic(float acceleration, float maxVelocity, Vector3 position)
+    private GameObject _player;
+
+    public PlayerLogic(float acceleration, float maxVelocity, GameObject player)
     {
-        _position = position;
         _acceleration = acceleration;
         _maxVelocity = maxVelocity;
+        _player = player;
     }
 
     public void Accelerate(Vector3 forward, float deltaTime)
@@ -22,12 +22,14 @@ public class PlayerLogic
         _velocity = Vector3.ClampMagnitude(_velocity, _maxVelocity);
     }
 
-    public Vector3 UpdatePosition(float deltaTime)
+    public void UpdatePosition(float deltaTime, float isAccelerating, Vector3 forwardVector)
     {
-        _position += _velocity * deltaTime;
-        return _position;
+        if (isAccelerating > 0) Accelerate(forwardVector, deltaTime);
+        _player.transform.position += _velocity * deltaTime;
     }
 
-
-
+    public void Rotate(float deltaTime, float rotationSide, float rotationSpeed)
+    {
+        _player.transform.Rotate(0, rotationSide * rotationSpeed * deltaTime, 0);
+    }
 }

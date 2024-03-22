@@ -33,18 +33,9 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "RotateLeft",
+                    "name": "Rotate",
                     "type": "Value",
-                    "id": "da9c0dd0-1bd4-463b-84d2-b7d7a7601b54",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": true
-                },
-                {
-                    "name": "RotateRight",
-                    "type": "Value",
-                    "id": "f114a6d1-9512-497a-b1a4-b32a4c66c9f2",
+                    "id": "e5f2f3eb-39d3-4999-8f9e-9b2c6f5322c4",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -76,28 +67,6 @@
                 },
                 {
                     "name": "",
-                    "id": "751939d0-965d-4197-b8c7-c00b63c3a2cd",
-                    "path": "<Keyboard>/a",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "RotateLeft",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "00f65604-c572-455c-8c26-9f3a3d475889",
-                    "path": "<Keyboard>/d",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "RotateRight",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "21bd4fa8-9db4-4190-b4ad-4b611e5ac23f",
                     "path": "<Keyboard>/w",
                     "interactions": "",
@@ -106,6 +75,39 @@
                     "action": "Accelerate",
                     "isComposite": false,
                     "isPartOfComposite": false
+                },
+                {
+                    "name": "1D Axis",
+                    "id": "0b2ef389-8861-436f-8726-b15f0cc27bc4",
+                    "path": "1DAxis",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Rotate",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "negative",
+                    "id": "8b2dc353-aee2-4900-a703-9ee402bc0f0b",
+                    "path": "<Keyboard>/a",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Rotate",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "positive",
+                    "id": "400e625e-4cc1-4810-9aba-054b059c2b75",
+                    "path": "<Keyboard>/d",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Rotate",
+                    "isComposite": false,
+                    "isPartOfComposite": true
                 }
             ]
         }
