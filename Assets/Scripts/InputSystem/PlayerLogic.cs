@@ -43,4 +43,9 @@ public class PlayerLogic
 
         player.transform.position = Camera.main.ViewportToWorldPoint(viewportPosition);
     }
+
+    public void Shoot(float isShooting)
+    {
+        return;
+    }
 }
