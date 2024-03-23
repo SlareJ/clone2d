@@ -25,7 +25,7 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        playerLogic = new PlayerLogic(_acceleration, _maxVelocity, player);
+        playerLogic = new PlayerLogic(_acceleration, _maxVelocity);
     }
 
     private void OnEnable()
@@ -40,8 +40,8 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        playerLogic.UpdatePosition(Time.deltaTime, _input.Player.Accelerate.ReadValue<float>(), player.transform.forward);
-        playerLogic.Rotate(Time.deltaTime, _input.Player.Rotate.ReadValue<float>(), rotationSpeed);
+        playerLogic.UpdatePosition(Time.deltaTime, _input.Player.Accelerate.ReadValue<float>(), player);
+        playerLogic.Rotate(Time.deltaTime, _input.Player.Rotate.ReadValue<float>(), rotationSpeed, player);
     }
 
     public void ToggleMenu()
