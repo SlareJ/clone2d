@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class PlayerLogic
 {
+    private Vector3 _velocity;
     private float _acceleration = 0;
     private float _maxVelocity = 0;
-    private Vector3 _velocity;
 
     public PlayerLogic(float acceleration, float maxVelocity)
     {

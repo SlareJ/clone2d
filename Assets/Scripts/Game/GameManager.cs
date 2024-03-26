@@ -37,6 +37,7 @@ public class GameManager : MonoBehaviour
         _playerLogic = new PlayerLogic(_acceleration, _maxVelocity);
         _bulletLogic = new BulletLogic(_bulletVelocity);
         _rockLogic = new RockLogic();
+
     }
 
     private void OnEnable()
@@ -69,10 +70,10 @@ public class GameManager : MonoBehaviour
         {
             GameObject bullet = Instantiate(_bullet, _bullet.transform.position, _player.transform.rotation * Quaternion.Euler(90, 0, 0));
             bullet.SetActive(true);
-            _bulletLogic.AddBullet(bullet, _player.transform.forward, _bulletLifeTime);
+            _bulletLogic.SpawnBullet(bullet, _player.transform.forward, _bulletLifeTime, _bulletVelocity);
             _timeLastShot = 0;
         }
-        _bulletLogic.Update(Time.deltaTime, _bulletLifeTime);
+        _bulletLogic.Update(Time.deltaTime);
     }
 
     private void UpdateRocks()
@@ -80,6 +81,7 @@ public class GameManager : MonoBehaviour
         SpawnRocks();
         _rockLogic.Update(Time.deltaTime);
     }
+
     private void SpawnRocks()
     {
         if (_rocksAmount == 0)

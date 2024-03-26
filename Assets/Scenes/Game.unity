@@ -1141,7 +1141,7 @@ GameObject:
   - component: {fileID: 1314876497}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1657,6 +1657,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4542884022525840951, guid: 1a032a49b9466de4a8c70d2de3c70b01, type: 3}
+      propertyPath: m_TagString
+      value: Rock
+      objectReference: {fileID: 0}
     - target: {fileID: 6297678436730950872, guid: 1a032a49b9466de4a8c70d2de3c70b01, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.50958747
@@ -1828,6 +1832,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8410582372559926134, guid: d04f82acf11449b4b9b4a1b21aa2482f, type: 3}
+      propertyPath: m_TagString
+      value: Bullet
+      objectReference: {fileID: 0}
+    - target: {fileID: 8410582372559926134, guid: d04f82acf11449b4b9b4a1b21aa2482f, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 0
       objectReference: {fileID: 0}
@@ -1855,6 +1863,10 @@ PrefabInstance:
     - target: {fileID: 454212669821118214, guid: 653e8da9959731545b496cb883675ce8, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 454212669821118214, guid: 653e8da9959731545b496cb883675ce8, type: 3}
+      propertyPath: m_TagString
+      value: Rock
       objectReference: {fileID: 0}
     - target: {fileID: 9189136562336472169, guid: 653e8da9959731545b496cb883675ce8, type: 3}
       propertyPath: m_LocalScale.x
@@ -1940,11 +1952,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 281996985881752019, guid: a6f2650b519f1b54ab7273c573815030, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -2.52
       objectReference: {fileID: 0}
     - target: {fileID: 281996985881752019, guid: a6f2650b519f1b54ab7273c573815030, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 1.27
       objectReference: {fileID: 0}
     - target: {fileID: 281996985881752019, guid: a6f2650b519f1b54ab7273c573815030, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1985,6 +1997,10 @@ PrefabInstance:
     - target: {fileID: 8652651208021353483, guid: a6f2650b519f1b54ab7273c573815030, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8652651208021353483, guid: a6f2650b519f1b54ab7273c573815030, type: 3}
+      propertyPath: m_TagString
+      value: Rock
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
