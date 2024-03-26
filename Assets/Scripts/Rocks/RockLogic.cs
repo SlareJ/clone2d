@@ -6,6 +6,11 @@ public class RockLogic
 {
     private List<Rock> _rocks = new List<Rock>();
 
+    public RockLogic()
+    {
+        CollisionManager.Instance.SetRocks(_rocks);
+    }
+
     public void SpawnLargeRock(GameObject rock)
     {
         LargeRock newRock = new LargeRock(rock);

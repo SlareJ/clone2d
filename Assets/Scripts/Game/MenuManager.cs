@@ -7,6 +7,7 @@ public class MenuManager : MonoBehaviour
     public void Play()
     {
         UnityEngine.SceneManagement.SceneManager.LoadScene("Game");
+        Time.timeScale = 1;
     }
 
     public void Exit()
@@ -23,6 +24,11 @@ public class MenuManager : MonoBehaviour
     {
         UnityEngine.SceneManagement.SceneManager.LoadScene("MainMenu");
         Time.timeScale = 1;
+    }
+
+    public void PlayAgain()
+    {
+        UnityEngine.SceneManagement.SceneManager.LoadScene("Game");
     }
 
 }

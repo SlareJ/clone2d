@@ -8,6 +8,8 @@ public class PlayerLogic
     private float _acceleration = 0;
     private float _maxVelocity = 0;
 
+    private Collider _playerCollider = new Collider(0.25f, 0.2f, -0.25f, -0.2f);
+
     public PlayerLogic(float acceleration, float maxVelocity)
     {
         _acceleration = acceleration;
@@ -42,5 +44,10 @@ public class PlayerLogic
         if (viewportPosition.y > 1) viewportPosition.y = 0;
 
         player.transform.position = Camera.main.ViewportToWorldPoint(viewportPosition);
+    }
+
+    public Collider GetPlayerCollider()
+    {
+        return _playerCollider;
     }
 }

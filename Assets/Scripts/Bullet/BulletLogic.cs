@@ -10,6 +10,7 @@ public class BulletLogic
     public BulletLogic(float velocity)
     {
         _velocity = velocity;
+        CollisionManager.Instance.SetBullets(_bullets);
     }
 
     public void Update(float deltaTime)

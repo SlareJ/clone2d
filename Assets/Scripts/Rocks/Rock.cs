@@ -6,6 +6,7 @@ public abstract class Rock
 {
     private GameObject _rock;
     private Vector3 _direction;
+    protected Collider _collider;
     protected float _velocity = 1;
     protected float _rotationSpeed = 1;
 
@@ -39,5 +40,15 @@ public abstract class Rock
     public void Destroy()
     {
         GameObject.Destroy(_rock);
+    }
+
+    public Vector3 GetRockPosition()
+    {
+        return _rock.transform.position;
+    }
+
+    public Collider GetRockCollider()
+    {
+        return _collider;
     }
 }

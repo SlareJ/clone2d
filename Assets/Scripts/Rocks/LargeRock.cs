@@ -8,6 +8,7 @@ public class LargeRock : Rock
     {
         _velocity = 1;
         _rotationSpeed = 10;
+        _collider = new Collider(0.5f, 0.5f, -0.5f, -0.5f);
     }
 
 }

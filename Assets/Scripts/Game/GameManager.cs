@@ -6,6 +6,7 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     [SerializeField] private GameObject _menu;
+    [SerializeField] private GameObject _gameOver;
     [SerializeField] private GameObject _player;
     [SerializeField] private GameObject _bullet;
     [SerializeField] private GameObject _largeRock;
@@ -21,6 +22,7 @@ public class GameManager : MonoBehaviour
     private BulletLogic _bulletLogic;
     private RockLogic _rockLogic;
     private PlayerInput _input;
+    private CollisionManager _collisionManager = CollisionManager.Instance;
     private float _timeLastShot = 100;
     private int _rocksAmount = 0;
     private int _currentLevel = 0;
@@ -55,6 +57,11 @@ public class GameManager : MonoBehaviour
         UpdatePlayer();
         UpdateBullet();
         UpdateRocks();
+        if (_collisionManager.Update(GetPlayerPosition(), _playerLogic.GetPlayerCollider()))
+        {
+            _gameOver.SetActive(true);
+            OnDisable();
+        }
     }
 
     private void UpdatePlayer()
@@ -103,6 +110,11 @@ public class GameManager : MonoBehaviour
                 _rockLogic.SpawnLargeRock(rock);
             }
         }
+    }
+
+    public Vector3 GetPlayerPosition()
+    {
+        return _player.transform.position;
     }
 
     public void ToggleMenu()
