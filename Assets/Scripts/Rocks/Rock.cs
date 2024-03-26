@@ -2,6 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum RockSize
+{
+    Small,
+    Medium,
+    Large
+}
+
 public abstract class Rock
 {
     private GameObject _rock;
@@ -9,6 +16,7 @@ public abstract class Rock
     protected Collider _collider;
     protected float _velocity = 1;
     protected float _rotationSpeed = 1;
+    public RockSize size;
 
     public Rock() { }
 
@@ -25,7 +33,7 @@ public abstract class Rock
         ScreenWrap();
     }
 
-    public void ScreenWrap()
+    private void ScreenWrap()
     {
         Vector3 viewportPosition = Camera.main.WorldToViewportPoint(_rock.transform.position);
 

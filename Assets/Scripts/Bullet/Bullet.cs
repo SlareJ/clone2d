@@ -6,6 +6,7 @@ public class Bullet
 {
     private GameObject _bullet;
     private Vector3 _direction;
+    private Collider _collider = new Collider(0.2f, 0.2f, -0.2f, -0.2f);
     private float _lifeTime;
     private float _velocity;
 
@@ -44,5 +45,15 @@ public class Bullet
     public void Destroy()
     {
         GameObject.Destroy(_bullet);
+    }
+
+    public Vector3 GetBulletPosition()
+    {
+        return _bullet.transform.position;
+    }
+
+    public Collider GetBulletCollider()
+    {
+        return _collider;
     }
 }

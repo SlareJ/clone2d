@@ -12,11 +12,11 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject _largeRock;
     [SerializeField] private GameObject _medRock;
     [SerializeField] private GameObject _smallRock;
-    [SerializeField] private float _acceleration;
-    [SerializeField] private float _maxVelocity;
-    [SerializeField] private float _rotationSpeed;
+    [SerializeField] private float _playerAcceleration;
+    [SerializeField] private float _playerMaxVelocity;
+    [SerializeField] private float _playerRotationSpeed;
     [SerializeField] private float _bulletLifeTime;
-    [SerializeField] private float _fireRate;
+    [SerializeField] private float _playerFireRate;
     [SerializeField] private float _bulletVelocity;
     private PlayerLogic _playerLogic;
     private BulletLogic _bulletLogic;
@@ -36,7 +36,7 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        _playerLogic = new PlayerLogic(_acceleration, _maxVelocity);
+        _playerLogic = new PlayerLogic(_playerAcceleration, _playerMaxVelocity);
         _bulletLogic = new BulletLogic(_bulletVelocity);
         _rockLogic = new RockLogic();
 
@@ -57,23 +57,20 @@ public class GameManager : MonoBehaviour
         UpdatePlayer();
         UpdateBullet();
         UpdateRocks();
-        if (_collisionManager.Update(GetPlayerPosition(), _playerLogic.GetPlayerCollider()))
-        {
-            _gameOver.SetActive(true);
-            OnDisable();
-        }
+        CheckPlayerCollisions();
+        CheckBulletCollisions();
     }
 
     private void UpdatePlayer()
     {
         _playerLogic.UpdatePosition(Time.deltaTime, _input.Player.Accelerate.ReadValue<float>(), _player);
-        _playerLogic.Rotate(Time.deltaTime, _input.Player.Rotate.ReadValue<float>(), _rotationSpeed, _player);
+        _playerLogic.Rotate(Time.deltaTime, _input.Player.Rotate.ReadValue<float>(), _playerRotationSpeed, _player);
     }
 
     private void UpdateBullet()
     {
         _timeLastShot += Time.deltaTime;
-        if (_input.Player.Shoot.ReadValue<float>() > 0 && _timeLastShot >= 1f / _fireRate)
+        if (_input.Player.Shoot.ReadValue<float>() > 0 && _timeLastShot >= 1f / _playerFireRate)
         {
             GameObject bullet = Instantiate(_bullet, _bullet.transform.position, _player.transform.rotation * Quaternion.Euler(90, 0, 0));
             bullet.SetActive(true);
@@ -94,7 +91,7 @@ public class GameManager : MonoBehaviour
         if (_rocksAmount == 0)
         {
             ++_currentLevel;
-            _rocksAmount = _currentLevel * 2 + 3;
+            _rocksAmount = _currentLevel * 15 / 10 + 2;
             for (int i = 0; i < _rocksAmount; ++i)
             {
                 Vector2 randCoords;
@@ -109,6 +106,47 @@ public class GameManager : MonoBehaviour
                 rock.SetActive(true);
                 _rockLogic.SpawnLargeRock(rock);
             }
+        }
+    }
+
+    private void CheckPlayerCollisions()
+    {
+        if (_collisionManager.CheckPlayerCollisions(GetPlayerPosition(), _playerLogic.GetPlayerCollider()))
+        {
+            _gameOver.SetActive(true);
+            OnDisable();
+        }
+    }
+
+    private void CheckBulletCollisions()
+    {
+        Tuple<Vector3, RockSize> temp = _collisionManager.CheckBulletCollisions();
+        Vector3 pos = temp.Item1;
+        RockSize size = temp.Item2;
+
+        if (size == RockSize.Large)
+        {
+            _rocksAmount += 1;
+            GameObject newRock0 = Instantiate(_medRock, pos, _medRock.transform.rotation);
+            newRock0.SetActive(true);
+            _rockLogic.SpawnMedRock(newRock0);
+            GameObject newRock1 = Instantiate(_medRock, pos, _medRock.transform.rotation);
+            newRock1.SetActive(true);
+            _rockLogic.SpawnMedRock(newRock1);
+        }
+        else if (size == RockSize.Medium)
+        {
+            _rocksAmount += 1;
+            GameObject newRock0 = Instantiate(_smallRock, pos, _smallRock.transform.rotation);
+            newRock0.SetActive(true);
+            _rockLogic.SpawnSmallRock(newRock0);
+            GameObject newRock1 = Instantiate(_smallRock, pos, _smallRock.transform.rotation);
+            newRock1.SetActive(true);
+            _rockLogic.SpawnSmallRock(newRock1);
+        }
+        else if (size == RockSize.Small && pos != Vector3.zero)
+        {
+            _rocksAmount -= 1;
         }
     }
 
