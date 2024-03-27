@@ -48,4 +48,9 @@ public class PlayerLogic
     {
         return _playerCollider;
     }
+
+    public float GetPlayerVelocity()
+    {
+        return _velocity.magnitude;
+    }
 }

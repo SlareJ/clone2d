@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -10,6 +11,9 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject _largeRock;
     [SerializeField] private GameObject _medRock;
     [SerializeField] private GameObject _smallRock;
+    [SerializeField] private Text _scoreText;
+    [SerializeField] private Text _levelText;
+    [SerializeField] private Text _speedText;
     [SerializeField] private float _playerAcceleration;
     [SerializeField] private float _playerMaxVelocity;
     [SerializeField] private float _playerRotationSpeed;
@@ -24,6 +28,7 @@ public class GameManager : MonoBehaviour
     private float _timeLastShot = 100;
     private int _rocksAmount = 0;
     private int _currentLevel = 0;
+    private int _score = 0;
     private bool _isPaused = false;
 
     private void Awake()
@@ -57,6 +62,7 @@ public class GameManager : MonoBehaviour
         UpdateRocks();
         CheckPlayerCollisions();
         CheckBulletCollisions();
+        UpdateHUD();
     }
 
     private void UpdatePlayer()
@@ -131,6 +137,7 @@ public class GameManager : MonoBehaviour
             GameObject newRock1 = Instantiate(_medRock, pos, _medRock.transform.rotation);
             newRock1.SetActive(true);
             _rockLogic.SpawnMedRock(newRock1);
+            _score += 20;
         }
         else if (size == RockSize.Medium)
         {
@@ -141,11 +148,20 @@ public class GameManager : MonoBehaviour
             GameObject newRock1 = Instantiate(_smallRock, pos, _smallRock.transform.rotation);
             newRock1.SetActive(true);
             _rockLogic.SpawnSmallRock(newRock1);
+            _score += 10;
         }
         else if (size == RockSize.Small && pos != Vector3.zero)
         {
             _rocksAmount -= 1;
+            _score += 5;
         }
+    }
+
+    private void UpdateHUD()
+    {
+        _scoreText.text = "Score: " + _score;
+        _levelText.text = "Level: " + _currentLevel;
+        _speedText.text = "Speed: " + (_playerLogic.GetPlayerVelocity() * 10).ToString("F0") + "/100";
     }
 
     public Vector3 GetPlayerPosition()
